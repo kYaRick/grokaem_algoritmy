@@ -1,7 +1,7 @@
 "use strict"
-let arrTest = [2, 8, 7, 1, 2, 2];
 
-function sort(arr) {
+//* Функція відповідно до алгоритму бінарного пошуку */
+function binSort(arr) {
 
   let arrSize = arr.length;               //витягую довжину вхідного масиву;
   let arrSort = [arrSize];                //резервую місце в пам'яті під новий масив із довжиною вхідного;
@@ -10,31 +10,32 @@ function sort(arr) {
     for (let j = i; j < arrSize; j++) {
       if (arr[i] > arr[j]) {
 
-        // //*for debug mode*/
+        // //* for debug mode*/
         // console.log("i: " + i);
         // console.log("j: " + j);
         // console.log("arr[i] before: " + arr[i]);
         // console.log("arr[j] before: " + arr[j]);
-        // //*end debug mode/
+        // //* end debug mode/
 
-        //*part for swap*/
+        //* part for swap*/
         let temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
-        //*end swap*/
+        //* end swap*/
 
-        // //*for debug mode*/
+        // //* for debug mode*/
         // console.log("arr[i] after: " + arr[i]);
         // console.log("arr[j] after: " + arr[j]);
-        // //*end debug mode/
+        // //* end debug mode/
       }
     }
     arrSort[i] = arr[i];
   }
-
   return arrSort;
 }
 
+//* Функція відповідно до алгоритму бінарного пошуку */
+//* Щось типу методу "Половинного ділення" */
 function binFind(arr, item, maxItt) {
   let arrS = 0;
   let arrF = arr.length - 1;
@@ -47,7 +48,7 @@ function binFind(arr, item, maxItt) {
   for (let i = 0; i < maxItt; i++) {
     let temp = Math.ceil((arrS + arrF) / 2);
 
-    // //*for debug mode*/
+    // //* for debug mode*/
     // let index = "[Console] ";
     // console.log(index + "Itt: " + (++i));
     // console.log(index + "arr[arrS]: " + arr[arrS]);
@@ -56,7 +57,7 @@ function binFind(arr, item, maxItt) {
     // console.log(index + "arr[temp]: " + arr[temp]);
     // console.log();
     // index = null;
-    // //*end debug mode/
+    // //* end debug mode/
 
     if (arr[temp] === item)
       return temp;
@@ -70,6 +71,7 @@ function binFind(arr, item, maxItt) {
   return null;
 }
 
+//* Факторіал через рекурсію */
 function fakt(num) {
   if (num > 1) {
     return num * (fakt(num - 1));
@@ -82,6 +84,7 @@ function fakt(num) {
   }
 }
 
+//* Сума усіх елементів масиву з допомогою циклу */
 function sumArr(arr) {
   let arrSize = arr.length;
   let sum = 0;
@@ -91,6 +94,7 @@ function sumArr(arr) {
   return sum;
 }
 
+//* Сума усіх елементів масиву з допомогою циклу */
 function sumArrFakt(arr, sp = 0) {
   let arrSize = arr.length;
   if (arrSize - 1 === (sp)) {
@@ -100,13 +104,34 @@ function sumArrFakt(arr, sp = 0) {
   }
 }
 
-function findMaxArrVal(arr) {
-  let maxEl = arr[0];
+//* Пошук мінімального|максимального елемента масиву
+//* і опевернення індексу цього елемента */
+//! Одина із найпримітивніших реалізацій */
+function findArrInd(arr, type = "min") {
   let arrSize = arr.length;
-  for (let i = 0; i < arrSize; i++) {
-    maxEl = maxEl < arr[i] ? arr[i] : maxEl;
-  }
-  return maxEl;
-}
+  let elIn = 0;
+  let el = arr[0];
 
-console.log(sumArr([4, 2, 6, 12, 29, 100, 301, 2, 3, 1, -2, -100]))
+  if (type === "min") {
+    for (let i = 0; i < arrSize; i++) {
+      if (el > arr[i]) {
+        el = arr[i];
+        elIn = i;
+      } else {
+        continue;
+      }
+    }
+  } else if (type === "max") {
+    for (let i = 0; i < arrSize; i++) {
+      if (el < arr[i]) {
+        el = arr[i];
+        elIn = i;
+      } else {
+        continue;
+      }
+    }
+  } else {
+    console.log("Undefined value \"type\"")
+  }
+  return elIn;
+}
