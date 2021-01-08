@@ -135,3 +135,57 @@ function findArrInd(arr, type = "min") {
   }
   return elIn;
 }
+
+//* Пошук значення поля в об'єкті */
+function task_1_1() {
+  let people = [
+    { name: 'Yaroslav', money: 1 ** 5 },
+    { name: 'Klavdia', money: 10e5 },
+    { name: 'Oksana', money: Number.MAX_SAFE_INTEGER },
+    { name: 'Kolya', money: 2500 }
+  ]
+  let money_status = (2 ** 53) - 1;
+
+  //? Реалізація пошуку з допомогою findIndex */
+  let index = people.findIndex(function (person) {
+    return person.money === money_status;
+  })
+
+  //? Реалізація пошуку з допомогою for .. of */
+  let result = function res() {
+    for (let person of people) {
+      if (person.money === money_status) {
+        return person;
+      }
+    }
+  }
+
+  console.log(people[index]);
+  console.log(result());
+}
+
+// TODO: Створіть масив styles з елементами «Джаз» і «Блюз».
+// TODO: Додайте «Рок-н-рол» в кінець.
+// TODO: Замініть значення в середині на «Класика». Ваш
+// !  код для пошуку значення в середині повинен працювати для масивів з будь-якою довжиною.
+// TODO: Видаліть перший елемент масиву і покажіть його.
+// TODO: Вставте «Реп» і «Реггі» на початок масиву.
+function task_1_2() {
+  let arr = ['Джаз', 'Блюз'];
+  console.log(arr);
+
+  arr.push('Рок-н-ров');
+  console.log(arr);
+
+  arr[Math.ceil(arr.length / 2) - 1] = 'Класика';
+  console.log(arr);
+
+  console.log(`Відбулось видалення елемента "${arr.shift()}"`);
+  console.log(arr);
+
+  let iArr = ['Реп', 'Регі'];
+  for (let el of iArr) {
+    arr.unshift(el);
+  }
+  console.log(arr);
+}
