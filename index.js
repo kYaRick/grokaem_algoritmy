@@ -189,3 +189,45 @@ function task_1_2() {
   }
   console.log(arr);
 }
+
+// TODO: Реалізувати алгорити швидкого пошуку, відповідно до запропонованого у підручнику алгоритму 
+function quiqSort(arr) {
+  let arrSize = arr.length;
+  let midlePos = Math.ceil(arrSize / 2) - 1;
+
+  let beforeArr = [];
+  let midleEl = arr[midlePos];
+  let afterArr = [];
+  let resultArr = new Array(arrSize);
+
+  for (let i = 0; i < midlePos; i++) {
+    arr[i] < midleEl ? beforeArr.push(arr[i]) : afterArr.push(arr[i]);
+  }
+  for (let i = midlePos + 1; i < arrSize; i++) {
+    arr[i] < midleEl ? beforeArr.push(arr[i]) : afterArr.push(arr[i]);
+  }
+
+  console.log('\nІндекс центрального елемента ' + midlePos);  //debug;
+  console.log('Центральний елемент ' + midleEl);              //debug;
+  console.log('До центрального елемента ' + beforeArr);       //debug;
+  console.log('Пілся центрального елемента ' + afterArr);     //debug;
+
+  //TODO: Реалізувати, через алгоритм швидкого пошуку;
+  binSort(beforeArr);
+  binSort(afterArr);
+  //TODO END//
+
+  let beforeArrSize = beforeArr.length
+  for (let i = 0; i < beforeArrSize; i++) {
+    resultArr[i] = beforeArr[i];
+  }
+  resultArr[beforeArrSize] = midleEl;
+  for (let i = 0; i < afterArr.length; i++) {
+    resultArr[beforeArrSize + i + 1] = afterArr[i];
+  }
+
+  console.log('Результуючий масив ' + resultArr);             //debug
+
+}
+
+quiqSort([2, 5, 1, 3, 4, 6, 7]);
